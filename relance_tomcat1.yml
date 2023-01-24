@@ -1,0 +1,10 @@
+---
+- name: relance Tomcat
+  hosts: all
+  become: true
+  tasks:
+  - name: Start Tomcat
+    service:
+      name: tomcat
+      state: started
+      enabled: true

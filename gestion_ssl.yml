@@ -1,0 +1,17 @@
+---
+- name: Gestion ssl
+  hosts: all
+  become: true
+  tasks:
+    - name: Install letsencrypt package
+      yum:
+        name: letsencrypt
+        state: present
+
+    - name: Generate SSL certificate
+      shell: letsencrypt certonly --webroot -w /var/www/html -d example.com -d www.example.com
+
+    - name: Configure web server to use SSL
+      template:
+        src: templates/ssl.conf.j2
+        dest: /etc/nginx/conf.d/ssl.conf
