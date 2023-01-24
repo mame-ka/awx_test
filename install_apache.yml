@@ -1,7 +1,7 @@
 ---
 
-- name: deploy httpd server
-  hosts: all
+- name: install httpd server
+  hosts: server1
   become: yes
   tasks:
   - name: install httpd
