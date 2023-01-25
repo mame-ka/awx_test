@@ -1,17 +1,17 @@
 ---
 
-- name: install httpd server
+- name: install and start tomcat
   hosts: redhat
   become: yes
   tasks:
-  - name: install httpd
+  - name: install tomcat
     yum:
-      name: httpd
+      name: tomcat
       state: latest
 
-  - name: start & enabled httpd
+  - name: start & enabled tomcat
     service:
-      name: httpd
+      name: tomcat
       state: started
       enabled: yes
 
