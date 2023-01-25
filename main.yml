@@ -1,15 +1,10 @@
----
-
-- name: install httpd server
-  hosts: redhat
-  become: yes
-  tasks:
-    - name: install tomcat
-      yum:
-        name: tomcat
-        state: present
-    - name: start tomcat service
-      service:
-        name: tomcat
-        state: started
-        enabled: yes
+--- 
+- name: Install and start Apach httpd and firewall
+  hosts: all
+  tasks:
+    - name: Install httpd and firewall
+      package:
+        name:
+          - httpd
+          - firewalld
+        state: present
