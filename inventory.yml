@@ -1,10 +1,10 @@
 ---
 all:
   children:
-    server1:
+    redhat:
       hosts:
-        192.168.33.11
-    server2:
+        [192.168.33.11, 192.168.33.13]
+    ubuntu:
       hosts:
         192.168.33.12
 ...
