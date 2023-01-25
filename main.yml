@@ -1,10 +1,10 @@
 --- 
 - name: Install and start Apach httpd and firewall
-  hosts: all
-  tasks:
-    - name: Install httpd and firewall
-      package:
-        name:
+  hosts: all
+  tasks:
+    - name: Install httpd and firewall
+      package:
+        name:
           - httpd
           - firewalld
         state: present
