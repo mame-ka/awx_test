@@ -4,7 +4,10 @@
   hosts: redhat
   become: yes
   tasks:
-  
+    - name: Update all packages
+      yum:
+        name: '*'
+        state: latest 
     - name: install tomcat
       yum:
         name: tomcat
