@@ -4,21 +4,22 @@
   hosts: redhat
   become: yes
   tasks:
-  - name: install tomcat
-    ansible.builtin.yum:
-      name: tomcat
-      state: latest
+  
+    - name: install tomcat
+      yum:
+        name: tomcat
+        state: present
 
-  - name: start & enabled tomcat
-    service:
-      name: tomcat
-      state: started
-      enabled: yes
+    - name: start & enabled tomcat
+      service:
+        name: tomcat
+        state: started
+        enabled: yes
 
-  - name: copy index.html
-    copy:
-      src: index.html
-      dest: /var/www/html/
+    - name: copy index.html
+      copy:
+        src: index.html
+        dest: /var/www/html/
 
 
 
