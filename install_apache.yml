@@ -5,7 +5,7 @@
   become: yes
   tasks:
   - name: install tomcat
-    yum:
+    ansible.builtin.yum:
       name: tomcat
       state: latest
 
