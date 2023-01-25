@@ -1,21 +1,17 @@
 ---
 
-- name: install and start tomcat
-  hosts: redhat
+- name: install and start http
+  hosts: 192.168.33.11
   become: yes
   tasks:
-    - name: Update all packages
-      yum:
-        name: '*'
-        state: latest 
-    - name: install tomcat
-      yum:
-        name: tomcat
+    - name: install 
+      ansible.builtin.yum:
+        name: httpd
         state: present
 
-    - name: start & enabled tomcat
+    - name: start & enabled httpd
       service:
-        name: tomcat
+        name: httpd
         state: started
         enabled: yes
 
@@ -29,5 +25,3 @@
 
 
 
-#Pour supprimer httpd (apache)
-#sudo yum remove httpd
