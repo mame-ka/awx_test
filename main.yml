@@ -1,0 +1,21 @@
+---
+
+- name: install httpd server
+  hosts: redhat
+  become: yes
+  tasks:
+  - name: install httpd
+    yum:
+      name: httpd
+      state: latest
+
+  - name: start & enabled httpd
+    service:
+      name: httpd
+      state: started
+      enabled: yes
+
+  - name: copy index.html
+    copy:
+      src: index.html
+      dest: /var/www/html/
