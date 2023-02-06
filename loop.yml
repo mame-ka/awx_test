@@ -19,7 +19,7 @@
         gpgcheck=1
         EOF
 
-    - name: Install mariadb packages
+    - name: Install mariadb packages and http service
       yum:
         update_cache: yes
         name: "{{ item }}"
@@ -31,3 +31,30 @@
         name: mariadb
         state: started
         enabled: true
+
+- name: create and add users to a group
+  hosts: ubuntu
+  become: true
+  vars: 
+    users:
+      - username: nouhaila
+        groups: network
+      - username: mame
+        groups: math
+      - username: eric
+        groups: projet
+
+  tasks:
+    - name: create groups
+      group:
+        name: "{{ item.groups }}"
+        state: present
+      with_items: "{{ users }}"
+      when: item.groups is defined
+   
+    - name: create users
+      user:
+        name: "{{ item.username }}"
+        groups: "{{ item.groups }}"
+        state: present
+      with_items: "{{ users }}"
