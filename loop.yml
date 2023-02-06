@@ -1,0 +1,33 @@
+---
+- name: Simple loop with ansible 
+  hosts: redhat
+  become: true
+  vars:
+    services:
+      - mariadb-server
+      - python3-PyMySQL
+      - httpd
+  tasks:
+    - name: Add MariaDB repository
+      when: ansible_os_family == "RedHat"
+      shell: |
+        cat << EOF > /etc/yum.repos.d/mariadb.repo
+        [mariadb]
+        name = MariaDB
+        baseurl = http://yum.mariadb.org/10.5/centos7-amd64
+        gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+        gpgcheck=1
+        EOF
+
+    - name: Install mariadb packages
+      yum:
+        update_cache: yes
+        name: "{{ item }}"
+        state: latest
+      loop: "{{ services }}"
+       
+    - name: Start MariaDB service
+      ansible.builtin.service:
+        name: mariadb
+        state: started
+        enabled: true
