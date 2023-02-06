@@ -1,0 +1,6 @@
+---
+- name: call apache install
+  import_playbook: install_apache.yml
+
+- name: call an encrypted playbook
+  import_playbook: loop.yml
