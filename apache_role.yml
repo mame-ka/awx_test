@@ -1,0 +1,6 @@
+---
+- name: Use httpd-role
+  hosts: redhat
+  roles: 
+    - role: httpd-role
+      sysadmin: mame@opensource.com
