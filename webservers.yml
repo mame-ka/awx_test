@@ -1,0 +1,7 @@
+---
+- name: Use apache role
+  hosts: redhat
+  become: true
+  roles: 
+    - role: apache 
+      sysadmin: nouha@opensource.com

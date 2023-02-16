@@ -1,0 +1,31 @@
+---
+# tasks file for apache
+- name: Install httpd and firewalld
+  yum:
+    name: 
+      - httpd
+      - firewalld
+    state: latest
+
+- name: Start and enable httpd and firewalld
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  loop: 
+    - httpd
+    - firewalld
+
+- name: Configure firewall to allow http service
+  ansible.posix.firewalld:
+    state: enabled
+    permanent: yes
+    immediate: yes
+    service: http
+
+
+- name: Install index.html using Jinja2
+  template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+  notify: restart httpd
